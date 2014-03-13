@@ -1,6 +1,9 @@
 window.onload = function() {
   d3.csv("cleaner_data.csv",
     function(error, rows) {
+      var margin = {top: 80, right: 80, bottom: 80, left: 80},
+        width = 960 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
       var multiplier = 3;
       var color = d3.scale.category10();
       var bar_width = 10;
@@ -38,10 +41,10 @@ window.onload = function() {
               .style('fill', function(d) { return color(d.category) });
 
       // Create an SVG group Element for the Axis elements and call the xAxis function
-      var yAxisGroup = employment.append('g')
-                                  .attr('class', 'y axis')
-                                  .attr('transform', 'translate(20, 0)')
-                                  .call(yAxis);
+        var yAxisGroup = employment.append('g')
+                                    .attr('class', 'y axis')
+                                    .attr('transform', 'translate(20, 0)')
+                                    .call(yAxis);
 
     });
 };
