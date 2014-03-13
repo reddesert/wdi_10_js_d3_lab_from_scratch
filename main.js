@@ -4,7 +4,7 @@ window.onload = function() {
       var multiplier = 3;
       var color = d3.scale.category10();
       var bar_width = 10;
-      var current_offset = 0;
+      var current_offset = 30;
       var nested_data = d3.nest()
                    .key(function(d) { return d.category} )
                    .entries(rows);
@@ -13,10 +13,10 @@ window.onload = function() {
       var employment = d3.select("#employment");
 
       // Create the scale that we'll use for the axis
-      var axisScale = d3.scale.linear().domain([0, 10]).range([0, 100]);
+      var axisScale = d3.scale.linear().domain([0, d3.max(rows.map(function(d) {return +d.percent_employed}))]).range([height, 0]);
 
       // Create the axis
-      var yAxis = d3.svg.axis().orient(['left']).scale(axisScale);
+      var yAxis = d3.svg.axis().scale(axisScale).ticks(4).tickSize(0).orient("left");
 
       employment.selectAll('g')
         .data(nested_data)
@@ -39,9 +39,9 @@ window.onload = function() {
 
       // Create an SVG group Element for the Axis elements and call the xAxis function
       var yAxisGroup = employment.append('g')
-                      .attr('class', 'y axis')
-                      .attr('transform', 'translate(20, 0)')
-                      .call(yAxis);
+                                  .attr('class', 'y axis')
+                                  .attr('transform', 'translate(20, 0)')
+                                  .call(yAxis);
 
     });
 };
