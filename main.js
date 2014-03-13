@@ -1,13 +1,13 @@
 window.onload = function() {
   d3.csv("cleaner_data.csv",
     function(error, rows) {
+      var multiplier = 3;
       var color = d3.scale.category10();
       var bar_width = 10;
       var current_offset = 0;
       var nested_data = d3.nest()
                    .key(function(d) { return d.category} )
                    .entries(rows);
-
       d3.select("#employment")
         .selectAll('g')
         .data(nested_data)
@@ -24,8 +24,8 @@ window.onload = function() {
             .append('rect')
               .attr('width', bar_width - 4 )
               .attr('x', function(d, i) { return i * (bar_width) })
-              .attr('height', function(d) { return d.percent_employed })
-              .attr('y', function(d) { return (100 - +d.percent_employed) })
+              .attr('height', function(d) { return d.percent_employed * multiplier })
+              .attr('y', function(d) { return (100 - +d.percent_employed) * multiplier })
               .style('fill', function(d) { return color(d.category) });
 
     });
