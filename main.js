@@ -52,7 +52,7 @@ window.onload = function() {
               .attr('y', function(d, i) { return 14 * i; })
               .style('fill', function(d) {return color(d.key); });
 
-      // Create an SVG group Element for the Axis elements and call the xAxis function
+        // Create an SVG group Element for the Axis elements and call the xAxis function
         var yAxisGroup = employment.append('g')
                                     .attr('class', 'y axis')
                                     .attr('transform', 'translate(20, 0)')
