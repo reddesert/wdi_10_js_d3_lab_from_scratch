@@ -37,8 +37,20 @@ window.onload = function() {
               .attr('width', bar_width - 4 )
               .attr('x', function(d, i) { return i * (bar_width) })
               .attr('height', function(d) { return d.percent_employed * multiplier })
-              .attr('y', function(d) { return (100 - +d.percent_employed) * multiplier })
+              .attr('y', function(d) { return (115 - +d.percent_employed) * multiplier })
               .style('fill', function(d) { return color(d.category) });
+
+        employment
+          .append('g')
+            .attr('class', 'legend')
+            .attr('transform', 'translate(100, 30)')
+            .selectAll('text')
+            .data(nested_data)
+            .enter()
+              .append('text')
+              .text(function(d) { return d.key; })
+              .attr('y', function(d, i) { return 14 * i; })
+              .style('fill', function(d) {return color(d.key); });
 
       // Create an SVG group Element for the Axis elements and call the xAxis function
         var yAxisGroup = employment.append('g')
